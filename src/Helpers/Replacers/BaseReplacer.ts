@@ -1,3 +1,5 @@
+import { NotFoundParameterError } from "./Errors/NotFoundParameterError";
+
 /**
  * заменяет плейсхолдеры
  */
@@ -5,14 +7,14 @@ export abstract class BaseReplacer {
 
 	protected string: string = "";
 	protected regex: RegExp = /./;
-	protected params: Record<string, string> = {};
+	protected params: Record<string, any> = {};
 
 	/**
 	 * Устанавливает регулярное выражение
 	 * @param {RegExp} regex 
 	 * @returns {BaseReplacer}
 	 */
-	setRegex(regex: RegExp): BaseReplacer {
+	protected setRegex(regex: RegExp): BaseReplacer {
 		this.regex = regex;
 		return this;
 	}
@@ -29,10 +31,10 @@ export abstract class BaseReplacer {
 
 	/**
 	 * Устанавливает параметры для замены
-	 * @param {object} params 
+	 * @param {Record<string, any>} params 
 	 * @returns {BaseReplacer}
 	 */
-	setParams(params: Record<string, string>): BaseReplacer {
+	setParams(params: Record<string, string|number>): BaseReplacer {
 		this.params = params;
 		return this;
 	}
@@ -44,7 +46,7 @@ export abstract class BaseReplacer {
 	toString(): string {
 		return this.string.replace(this.regex, (_, placeholderName) => {
 			if (!this.params.hasOwnProperty(placeholderName)) {
-				throw new Error(`not found parameter with key ${placeholderName}`);
+				throw new NotFoundParameterError(placeholderName);
 			}
 			return this.params[placeholderName];
 		});

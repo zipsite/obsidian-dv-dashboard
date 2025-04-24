@@ -1,8 +1,9 @@
 import { Config } from "@/Helpers/Config";
 import { LocaleByLang, Langs, LocalesList } from "./Types";
-import { NotFoundParameterError } from "./Errors/NotFoundParameterError";
+import { NotFoundParameterError } from "../Replacers/Errors/NotFoundParameterError";
 import { NotFoundLocaleError } from "./Errors/NotFoundLocaleError";
 import { InvalidLangError } from "./Errors/InvalidLangError";
+import JsPlaceholderReplacer from "../Replacers/JsPlaceholderReplacer";
 
 /**
  * Управление и получение локалей
@@ -26,9 +27,11 @@ export class Locales {
 	}
 
 	private lang: Langs
+	private replacer: JsPlaceholderReplacer
 
 	constructor() {
 		this.lang = (new Config).get("localesLang") ?? "";
+		this.replacer = new JsPlaceholderReplacer();
 	}
 
 	/**
@@ -63,15 +66,13 @@ export class Locales {
 	 * @param {Record<string, string>} params 
 	 * @returns 
 	 */
-	getLocale(key: string, params: Record<string, any> = {}) {
+	getLocale(key: string, params: Record<string, string | number> = {}) {
 
 		const certainLocale = this.getCertainLocale(key);
 
-		return certainLocale.replace(/\$\{([a-zA-Z_$][0-9a-zA-Z_$]*)\}/g, (_, placeholderName: string) => {
-			if (!params.hasOwnProperty(placeholderName)) {
-				throw new NotFoundParameterError(placeholderName);
-			}
-			return params[placeholderName];
-		});
+		return this.replacer
+			.setString(certainLocale)
+			.setParams(params)
+			.toString()
 	}
 }

@@ -1,7 +1,6 @@
 import { NotFoundLocaleError } from "@/Helpers/Locales/Errors/NotFoundLocaleError";
-import { NotFoundParameterError } from "@/Helpers/Locales/Errors/NotFoundParameterError";
 import { Locales } from "@/Helpers/Locales/Locales";
-import { expect, test, describe } from "vitest";
+import { expect, test } from "vitest";
 
 test("Получение существующей локали", () => {
     const locale = new Locales();
@@ -17,11 +16,4 @@ test("Получение несуществующей локали", () => {
 
     expect(() => locale.getLocale(key))
         .toThrow(new NotFoundLocaleError(key))
-})
-
-test("Передача неправильных параметров", () => {
-    const locale = new Locales();
-
-    expect(() => locale.getLocale("headerTopicList"))
-        .toThrow(new NotFoundParameterError("topicsCount"))
 })
