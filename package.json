@@ -5,7 +5,9 @@
   "main": "./dist/topic.js",
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build"
+    "build": "tsc && vite build",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "keywords": [],
   "author": "",
@@ -14,8 +16,10 @@
     "@types/estree": "^1.0.7",
     "@types/luxon": "^3.6.2",
     "@types/node": "^22.14.1",
+    "@vitest/coverage-v8": "^3.1.2",
     "typescript": "^5.8.3",
-    "vite": "^6.3.2"
+    "vite": "^6.3.2",
+    "vitest": "^3.1.2"
   },
   "dependencies": {
     "luxon": "^3.6.1",

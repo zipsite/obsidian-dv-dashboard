@@ -1,15 +1,15 @@
-import { Locale } from "@/Helpers/Locale";
+import { Locales } from "@/Helpers/Locales/Locales";
 import { TopicReadUtil } from "@/Helpers/ReadUtil/TopicReadUtil";
 import { DvPage } from "@/Helpers/ReadUtil/Types";
 
 export abstract class BaseShower {
 
     protected topicReadUtil: TopicReadUtil
-    protected locale: Locale;
+    protected locale: Locales;
 
     constructor() {
         this.topicReadUtil = new TopicReadUtil()
-        this.locale = new Locale();
+        this.locale = new Locales();
     }
 
     /**

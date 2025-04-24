@@ -1,12 +1,15 @@
 import { Config } from "@/Helpers/Config";
-import { LocaleByLang, Langs, Locales } from "./Types/Locales";
+import { LocaleByLang, Langs, LocalesList } from "./Types";
+import { NotFoundParameterError } from "./Errors/NotFoundParameterError";
+import { NotFoundLocaleError } from "./Errors/NotFoundLocaleError";
+import { InvalidLangError } from "./Errors/InvalidLangError";
 
 /**
  * Управление и получение локалей
  */
-export class Locale {
+export class Locales {
 
-	private allLocales: LocaleByLang = {
+	private allLangLocales: LocaleByLang = {
 		"ru_RU": {
 			headerTopicContent: "Содержание",
 			headerDescriptionPage: "# Описание",
@@ -30,13 +33,13 @@ export class Locale {
 
 	/**
 	 * Возвращает локали определённого языка
-	 * @returns {Locale}
+	 * @returns {Locales}
 	 */
-	private getCertainLangLocales(): Locales {
-		if (!this.allLocales.hasOwnProperty(this.lang)) {
-			throw new Error("invalid lang locale, please see /Config");
+	private getCertainLangLocales(): LocalesList {
+		if (!this.allLangLocales.hasOwnProperty(this.lang)) {
+			throw new InvalidLangError(this.lang);
 		}
-		return this.allLocales[this.lang];
+		return this.allLangLocales[this.lang];
 	}
 
 	/**
@@ -48,7 +51,7 @@ export class Locale {
 		const certainLangLocale = this.getCertainLangLocales();
 
 		if (!certainLangLocale.hasOwnProperty(key)) {
-			throw new Error(`not found locale for ${key} key`)
+			throw new NotFoundLocaleError(key)
 		}
 
 		return certainLangLocale[key];
@@ -66,7 +69,7 @@ export class Locale {
 
 		return certainLocale.replace(/\$\{([a-zA-Z_$][0-9a-zA-Z_$]*)\}/g, (_, placeholderName: string) => {
 			if (!params.hasOwnProperty(placeholderName)) {
-				throw new Error(`not found parameter with placeholder ${placeholderName}`);
+				throw new NotFoundParameterError(placeholderName);
 			}
 			return params[placeholderName];
 		});
