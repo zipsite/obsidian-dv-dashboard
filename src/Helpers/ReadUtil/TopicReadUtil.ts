@@ -1,4 +1,5 @@
 import { PageReadUtil } from "@/Helpers/ReadUtil/PageReadUtil";
+import { NotFoundTopicIdError } from "./Errors/NotFoundTopicIdError";
 
 export class TopicReadUtil extends PageReadUtil {
 
@@ -19,9 +20,9 @@ export class TopicReadUtil extends PageReadUtil {
 				break;
 			}
 		}
-
+		
 		if (topicId === "") {
-			throw new Error(`topicId not foud for page ${this.getFile().path}`)
+			throw new NotFoundTopicIdError(this.getFile().path)
 		}
 
 		return topicId;

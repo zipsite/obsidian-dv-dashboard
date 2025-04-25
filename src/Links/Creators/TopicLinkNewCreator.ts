@@ -13,17 +13,12 @@ export class TopicLinkNewCreator extends BaseLinkNewCreator {
 	}
 
 	protected handler() {
-		const mainTopicId = this.topicReadUtil.getTopicId();
 		const subTopicId = this.genUniqueId()
 		const subTopicFileName = this.locale.getLocale("newTopicName");
 		const subTopicPath = this.saveFolders.getEntityPath("topicSaveFolder", subTopicId, subTopicFileName);
 
 		this.content
 			.addContentFrontmatter({
-				tags: [
-					`topicId/${subTopicId}`,
-					`topicParentId/${mainTopicId}`
-				],
 				pageType: "topic",
 				cssclasses: ["topic"],
 				banner: "",

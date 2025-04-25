@@ -1,11 +1,12 @@
 import { DvPage, DvPageFile, Frontmatter } from "@/Helpers/ReadUtil/Types";
+import { PageDontSetError } from "./Errors/PageDontSetError";
 
 /**
  * утилиты для чтения страницы
  */
 export abstract class PageReadUtil {
     
-    page?: DvPage
+    protected page?: DvPage
 
     /**
      * Устанавливает страницу в объект
@@ -23,7 +24,7 @@ export abstract class PageReadUtil {
      */
     getPage(): DvPage {
         if (this.page === undefined) {
-            throw new Error("page dont set");
+            throw new PageDontSetError();
         }
         return this.page;
     }

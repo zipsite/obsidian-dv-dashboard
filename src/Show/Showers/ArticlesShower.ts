@@ -14,8 +14,7 @@ export class ArticleShower extends BaseShower {
 		
         this.genNewArticleLink.setPage(this.topicReadUtil.getPage());
 
-		const mainTopicId = this.topicReadUtil.getTopicId();
-		const articles = dv.pages(`#articleParentId/${mainTopicId}`)
+		const articles = this.searchPage.getArticles();
 
 		const listOfArticles = articles.map((article) => {
 			return this.locale.getLocale("elemArticleList", {

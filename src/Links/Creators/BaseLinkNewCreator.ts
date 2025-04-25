@@ -1,9 +1,9 @@
-import { Locale } from "@/Helpers/Locale"
+import { Locales } from "@/Helpers/Locales/Locales"
 import { Content } from "@/Links/Content"
 import { ObsidianURLGenerator } from "@/Links/URLGenerators/ObsidianURLGenerator"
 import { BaseURLGenerator } from "@/Links/URLGenerators/BaseURLGenerator"
 import { TopicReadUtil } from "@/Helpers/ReadUtil/TopicReadUtil"
-import { Folders } from "@/Helpers/Folders"
+import { FoldersUtil } from "@/Helpers/FoldersUtil"
 import { DvPage } from "@/Helpers/ReadUtil/Types"
 
 
@@ -15,19 +15,20 @@ import { DvPage } from "@/Helpers/ReadUtil/Types"
 export abstract class BaseLinkNewCreator {
 
 	protected content: Content;
-	protected locale: Locale;
+	protected locale: Locales;
 	protected obsidianURL: ObsidianURLGenerator;
 	protected urlGenerator: BaseURLGenerator;
 	protected topicReadUtil: TopicReadUtil;
-	protected saveFolders: Folders;
+	protected saveFolders: FoldersUtil;
 
 	constructor() {
 		this.content = new Content();
-		this.locale = new Locale()
+		this.locale = new Locales()
 		this.obsidianURL = new ObsidianURLGenerator();
 		this.urlGenerator = new BaseURLGenerator();
 		this.topicReadUtil = new TopicReadUtil();
-		this.saveFolders = new Folders(this.topicReadUtil);
+		this.saveFolders = (new FoldersUtil())
+			.setTopicReadUtil(this.topicReadUtil);
 	}
 
 	/**

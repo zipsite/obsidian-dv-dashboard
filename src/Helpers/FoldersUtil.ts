@@ -3,17 +3,23 @@ import { TopicReadUtil } from "@/Helpers/ReadUtil/TopicReadUtil";
 /**
  * Вычисление пути сохранения топиков и статей
  */
-export class Folders {
+export class FoldersUtil {
 
-	folderConfig: Record<string, string> = {
+	private folderConfig: Record<string, string> = {
 		topicSaveFolder: "topics",
 		articleSaveFolder: "articles",
 	}
 
-	topicReadUtil: TopicReadUtil;
+	private topicReadUtil!: TopicReadUtil;
 
-	constructor(topicReadUtil: TopicReadUtil) {
+	/**
+	 * Устанавливает ридер топика
+	 * @param topicReadUtil 
+	 * @returns {FoldersUtil}
+	 */
+	setTopicReadUtil(topicReadUtil: TopicReadUtil): FoldersUtil {
 		this.topicReadUtil = topicReadUtil;
+		return this;
 	}
 
 	/**

@@ -1,10 +1,10 @@
 export type Langs = "ru_RU";
 
-export type Locales = {
+export type LocalesList = {
     [key: string]: string;
 }
 
 export type LocaleByLang = {
-    [key in Langs]: Locales;
+    [key in Langs]: LocalesList;
 };
 
