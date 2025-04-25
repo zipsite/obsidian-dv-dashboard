@@ -10,15 +10,13 @@ export class TopicsShower extends BaseShower {
     constructor() {
         super();
         this.genNewTopicLink = new TopicLinkNewCreator()
-        
     }
 
     protected handler(): void {
 
         this.genNewTopicLink.setPage(this.topicReadUtil.getPage());
 
-        const mainTopicId = this.topicReadUtil.getTopicId();
-        const topics = dv.pages(`#topicParentId/${mainTopicId}`);
+        const topics = this.searchPage.getTopics();
         const topicContainer = (new TopicContainer()).setProp("topics", topics);
         const newTopicLink = this.genNewTopicLink.getLink();
 

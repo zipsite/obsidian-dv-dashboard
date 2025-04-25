@@ -16,12 +16,13 @@ export type DvPageFile = {
     mday: DateTime,
     size: number,
     starred: boolean,
-    link: DvPageFileLink,
+    link: DvPageLink,
+    inlinks: Array<DvPageLink>,
     frontmatter: Frontmatter,
     [key: string]: any;
 }
 
-export type DvPageFileLink = {
+export type DvPageLink = {
     path: string,
     embed: boolean,
     type: string,

@@ -34,7 +34,7 @@ export abstract class BaseReplacer {
 	 * @param {Record<string, any>} params 
 	 * @returns {BaseReplacer}
 	 */
-	setParams(params: Record<string, string|number>): BaseReplacer {
+	setParams(params: Record<string, any>): BaseReplacer {
 		this.params = params;
 		return this;
 	}

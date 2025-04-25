@@ -46,7 +46,7 @@ export class ObsidianURLGenerator extends BaseURLGenerator {
 		path: string, 
 		content: string = "", 
 		silent: boolean = true, 
-		overwrite: boolean = true,
+		overwrite: boolean = false,
 	): string {
 
 		this.setAction("new")

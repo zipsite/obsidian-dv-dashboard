@@ -21,6 +21,7 @@ const mockaDvPage: DvPage = {
             embed: false,
             type: "file",
         },
+        inlinks: [],
         frontmatter: {}
     }
 }

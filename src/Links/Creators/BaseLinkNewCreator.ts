@@ -27,7 +27,8 @@ export abstract class BaseLinkNewCreator {
 		this.obsidianURL = new ObsidianURLGenerator();
 		this.urlGenerator = new BaseURLGenerator();
 		this.topicReadUtil = new TopicReadUtil();
-		this.saveFolders = new FoldersUtil(this.topicReadUtil);
+		this.saveFolders = (new FoldersUtil())
+			.setTopicReadUtil(this.topicReadUtil);
 	}
 
 	/**

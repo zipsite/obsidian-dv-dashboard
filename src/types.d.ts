@@ -3,6 +3,7 @@ import { DvPage } from "./Helpers/ReadUtil/Types";
 declare global {
     const app: any
     const dv: {
+        page: (path: string) => DvPage;
         pages: (source: string) => Array<DvPage>;
         header: (level: number, text: string) => void;
         paragraph: (text: string) => void;

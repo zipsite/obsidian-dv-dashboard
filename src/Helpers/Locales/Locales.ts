@@ -1,6 +1,5 @@
 import { Config } from "@/Helpers/Config";
 import { LocaleByLang, Langs, LocalesList } from "./Types";
-import { NotFoundParameterError } from "../Replacers/Errors/NotFoundParameterError";
 import { NotFoundLocaleError } from "./Errors/NotFoundLocaleError";
 import { InvalidLangError } from "./Errors/InvalidLangError";
 import JsPlaceholderReplacer from "../Replacers/JsPlaceholderReplacer";
@@ -66,7 +65,7 @@ export class Locales {
 	 * @param {Record<string, string>} params 
 	 * @returns 
 	 */
-	getLocale(key: string, params: Record<string, string | number> = {}) {
+	getLocale(key: string, params: Record<string, any> = {}) {
 
 		const certainLocale = this.getCertainLocale(key);
 
