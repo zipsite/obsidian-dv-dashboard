@@ -16,12 +16,15 @@ export class TopicLinkNewCreator extends BaseLinkNewCreator {
 		const subTopicId = this.genUniqueId()
 		const subTopicFileName = this.locale.getLocale("newTopicName");
 		const subTopicPath = this.saveFolders.getEntityPath("topicSaveFolder", subTopicId, subTopicFileName);
+		const nowDate = new Date();
+		const formattedDate = nowDate.toLocaleString('sv-SE').replace(' ', 'T');
 
 		this.content
 			.addContentFrontmatter({
 				pageType: "topic",
 				cssclasses: ["topic"],
 				banner: "",
+				createDate: formattedDate,
 			})
 			.addContentString(this.genRelationBlock("relatedTopicInfo"))
 			.addContentString(this.locale.getLocale("headerDescriptionPage"))
